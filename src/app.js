@@ -22,27 +22,33 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDir))
 
 app.get('', (req, res) => {
-    res.render('index', {
-        title: 'Weather',
-        name: 'Amanda Giannelli'
-    })
+    res.render('index', {})
 })
 
 app.get('/about', (req, res) => {
-    res.render('about', {
-        title: 'About',
-        name: 'Amanda Giannelli'
+    res.render('about', {})
+})
+
+app.get('/blog', (req, res) => {
+    res.render('blog', {})
+})
+
+app.get('/portfolio', (req, res) => {
+    res.render('portfolio', {})
+})
+
+app.get('/portfolio/weather', (req, res) => {
+    res.render('weather', {})
+})
+
+app.get('/portfolio/*', (req, res) => {
+    res.render('404', {
+        title: '404 - Project Not Found -',
+        errorMessage: 'Project article not found.'
     })
 })
 
-app.get('/help', (req, res) => {
-    res.render('help', {
-        title: 'Help',
-        message: 'Welcome to the help page...',
-        name: 'Amanda Giannelli'
-    })
-})
-
+// api to get forecast
 app.get('/weather', (req, res) => {
     const address = req.query.address
 
@@ -71,33 +77,11 @@ app.get('/weather', (req, res) => {
     })
 })
 
-app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        return res.send({
-            error: 'You must provide a search term!'
-        })
-    }
-
-    console.log(req.query.search)
-    res.send({
-        products: []
-    })
-})
-
-app.get('/help/*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        errorMessage: 'Help article not found.',
-        name: 'Amanda Giannelli'
-    })
-})
-
-// wildcard to redirect to 404 (this is why it must go last!)
+// wildcard to redirect to 404
 app.get('*', (req, res) => {
     res.render('404', {
-        title: '404',
-        errorMessage: 'Page not found.',
-        name: 'Amanda Giannelli'
+        title: '404 - Page Not Found',
+        errorMessage: 'Page not found.'
     })
 })
 
