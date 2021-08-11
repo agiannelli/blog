@@ -5,6 +5,10 @@ router.get('/portfolio', (req, res) => {
     res.render('portfolio', {})
 })
 
+router.get('/portfolio/chuck-norris', (req, res) => {
+    res.render('portfolio/chuck-norris', {})
+})
+
 router.get('/portfolio/weather', (req, res) => {
     res.render('portfolio/weather', {})
 })
