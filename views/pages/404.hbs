@@ -1,15 +1,12 @@
 <html>
     <head>
-        <title>404</title>
-         <link rel="icon" href="/img/weather.png" />
-        <link rel='stylesheet' href='/css/styles.css' />
+        {{>helmet}}
     </head>
     <body>
         <div class="main-content">
-            {{>header}}
+            {{>navigation}}
             <p>{{errorMessage}}</p>
         </div>
-
         {{>footer}}
     </body>
 </html>
