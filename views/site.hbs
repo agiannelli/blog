@@ -5,7 +5,7 @@
     <body>
         <div class="main-content">
             {{>navigation}}
-            <p>Blog coming soon!</p>
+            {{> (lookup . 'pageBody') }}
         </div>
         {{>footer}}
     </body>

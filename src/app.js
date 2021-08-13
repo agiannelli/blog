@@ -11,7 +11,7 @@ const authRouter = require('./routes/auth')
 const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
 const portfolioRouter = require('./routes/portfolio')
-const usersRouter = require('./routes/users')
+const adminRouter = require('./routes/admin')
 
 dotenv.config()
 
@@ -48,7 +48,7 @@ const port = process.env.PORT || 723
 
 // Define paths for express config
 const publicDir = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname, '../views/pages')
+const viewsPath = path.join(__dirname, '../views')
 const partialsPath = path.join(__dirname, '../views/partials')
 
 // Setup handlebars engine and views
@@ -90,13 +90,14 @@ app.use('/', authRouter)
 app.use('/', indexRouter)
 app.use('/', portfolioRouter)
 app.use('/', apiRouter)
-app.use('/', usersRouter)
+app.use('/', adminRouter)
 
 // wildcard to redirect to 404
 app.get('*', (req, res) => {
-    res.render('404', {
+    res.render('site', {
         title: '404 - Page Not Found',
-        errorMessage: 'Page not found.'
+        errorMessage: 'Page not found.',
+        pageBody: 'pages/404'
     })
 })
 
@@ -105,9 +106,10 @@ app.get('*', (req, res) => {
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500)
-        res.render('error', {
+        res.render('site', {
             message: err.message,
-            error: err
+            error: err,
+            pageBody: 'error'
         })
     })
 }
@@ -116,9 +118,10 @@ if (app.get('env') === 'development') {
 // No stacktraces leaked to user
 app.use(function (err, req, res, next) {
     res.status(err.status || 500)
-    res.render('error', {
+    res.render('site', {
         message: err.message,
-        error: {}
+        error: {},
+        pageBody: 'error'
     })
 })
 

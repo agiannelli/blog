@@ -1,0 +1,17 @@
+<html>
+    <head>
+        {{>helmet}}
+    </head>
+    <body>
+        <div class="main-content">
+            {{>navigation}}
+            {{#if user}}
+                <a href='/logout'>Log Out</a></li>
+            {{else}}
+                <a href='/login'>Login</a>
+            {{/if}}
+            {{> (lookup . 'pageBody') }}
+        </div>
+        {{>footer}}
+    </body>
+</html>
